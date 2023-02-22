@@ -63,6 +63,9 @@ public class User extends BaseEntity {
     @Column
     private LocalDateTime birthday;
 
+    @Column
+    private Integer age;
+
     /**
      * 状态 1-正常 2-禁用
      */
@@ -86,6 +89,7 @@ public class User extends BaseEntity {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birthday=" + birthday +
+                ", age=" + age +
                 ", status=" + status +
                 ", lastLogin=" + lastLogin +
                 "} " + super.toString();

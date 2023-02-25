@@ -36,14 +36,14 @@ class UserDaoTest {
 
     @Test
     void getById() {
-        Optional<User> user = userDao.findById(2);
+        Optional<User> user = userDao.findById(2L);
         user.ifPresent(System.out::println);
 
     }
 
     @Test
     void updateById() {
-        Optional<User> user = userDao.findById(1);
+        Optional<User> user = userDao.findById(1L);
         user.ifPresent(u -> {
             u.setUsername("李四");
             User user0 = userDao.save(u);
@@ -53,14 +53,14 @@ class UserDaoTest {
 
     @Test
     void deleteById() {
-        userDao.deleteById(1);
-        Assertions.assertTrue(userDao.findById(1).isEmpty());
+        userDao.deleteById(1L);
+        Assertions.assertTrue(userDao.findById(1L).isEmpty());
     }
 
     @Test
 //    @Transactional
     void logicDeleteById() {
-        userDao.logicDeleteById(2);
-        Assertions.assertTrue(userDao.findById(2).isEmpty());
+        userDao.logicDeleteById(2L);
+        Assertions.assertTrue(userDao.findById(2L).isEmpty());
     }
 }

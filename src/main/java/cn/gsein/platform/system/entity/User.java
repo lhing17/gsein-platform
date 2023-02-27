@@ -35,6 +35,10 @@ public class User extends BaseEntity {
     @Column
     private String password;
 
+    /**
+     * 用于密码加密的盐值
+     */
+    private String salt;
 
     /**
      * 身份证号

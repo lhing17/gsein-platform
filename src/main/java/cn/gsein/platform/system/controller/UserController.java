@@ -41,4 +41,13 @@ public class UserController {
         return Result.ok();
     }
 
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    Result<Void> login(@RequestBody User user) {
+        userService.login(user);
+        return Result.ok();
+    }
+
 }

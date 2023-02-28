@@ -15,7 +15,7 @@ public class BaseEntity {
      * 创建人
      */
     @Column
-    private Integer createdBy;
+    private Long createdBy;
 
     /**
      * 创建时间
@@ -27,7 +27,7 @@ public class BaseEntity {
      * 修改人
      */
     @Column
-    private Integer updatedBy;
+    private Long updatedBy;
 
     /**
      * 修改时间

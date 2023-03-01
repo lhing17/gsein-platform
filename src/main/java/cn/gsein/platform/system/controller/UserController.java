@@ -1,6 +1,7 @@
 package cn.gsein.platform.system.controller;
 
 
+import cn.gsein.platform.system.utils.JwtUtil;
 import cn.gsein.platform.system.entity.Result;
 import cn.gsein.platform.system.entity.User;
 import cn.gsein.platform.system.service.UserService;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 @RequestMapping("/api/v1/user")
 @Slf4j
 public class UserController {
+
 
     @Resource
     private UserService userService;
@@ -45,9 +47,10 @@ public class UserController {
      * 登录
      */
     @PostMapping("/login")
-    Result<Void> login(@RequestBody User user) {
+    Result<String> login(@RequestBody User user) {
         userService.login(user);
-        return Result.ok();
+        String token = JwtUtil.generateToken(user.getId(), user.getUsername());
+        return Result.ok(token);
     }
 
 }

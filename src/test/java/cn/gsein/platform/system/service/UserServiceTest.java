@@ -28,7 +28,7 @@ class UserServiceTest {
     @Test
     void save() {
         User user = new User();
-        user.setUsername("王五");
+        user.setUsername("赵六");
         user.setGender(0);
         user.setPassword("1234567");
         user.setIdCard("110110200001010001");

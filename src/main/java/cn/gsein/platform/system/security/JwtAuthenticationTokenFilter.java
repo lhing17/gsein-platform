@@ -26,16 +26,22 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(AUTHORIZATION);
+        String requestURI = request.getRequestURI();
+        if ("/api/v1/user/login".equals(requestURI)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         if (token == null) {
             throw new GseinException("token不能为空");
         }
 
-        if (!JwtUtil.verify(token)) {
-            throw new GseinException("token不合法");
+        if (JwtUtil.verify(token) && JwtUtil.isExpired(token)) {
+            throw new GseinException("token已过期");
         }
 
-        if (JwtUtil.isExpired(token)) {
-            throw new GseinException("token已过期");
+        if (!JwtUtil.verify(token)) {
+            throw new GseinException("token不合法");
         }
 
         String username = JwtUtil.getUsername(token);

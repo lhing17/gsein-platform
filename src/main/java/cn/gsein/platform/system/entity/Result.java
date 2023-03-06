@@ -48,6 +48,13 @@ public class Result<T> {
         return result;
     }
 
+    public static Result<Void> error(String message) {
+        Result<Void> result = new Result<>();
+        result.setCode(500);
+        result.setMessage(message);
+        return result;
+    }
+
     public static Result<Void> error(Integer code, String message) {
         Result<Void> result = new Result<>();
         result.setCode(code);

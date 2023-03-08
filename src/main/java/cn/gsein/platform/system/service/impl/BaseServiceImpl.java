@@ -3,14 +3,13 @@ package cn.gsein.platform.system.service.impl;
 import cn.gsein.platform.system.dao.BaseDao;
 import cn.gsein.platform.system.entity.BaseEntity;
 import cn.gsein.platform.system.service.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
-public class BaseServiceImpl<D extends BaseDao<T>, T extends BaseEntity> implements BaseService<T> {
+public abstract class BaseServiceImpl<D extends BaseDao<T>, T extends BaseEntity> implements BaseService<T> {
 
-    @Resource
+    @Autowired
     protected D dao;
 
 

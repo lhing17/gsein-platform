@@ -1,5 +1,6 @@
 package cn.gsein.platform.system.service;
 
+import cn.gsein.platform.system.entity.Role;
 import cn.gsein.platform.system.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,10 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
-
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Collections;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -19,16 +18,19 @@ class UserServiceTest {
     @Resource
     private UserService userService;
 
+    @Resource
+    private RoleService roleService;
+
     @Test
     void getById() {
-        User user = userService.findById(2L);
+        User user = userService.findById(10L);
         System.out.println(user);
     }
 
     @Test
     void save() {
         User user = new User();
-        user.setUsername("李七");
+        user.setUsername("孙八");
         user.setGender(0);
         user.setPassword("1234567");
         user.setIdCard("110110200001010001");
@@ -37,7 +39,14 @@ class UserServiceTest {
         user.setBirthday(LocalDateTime.now());
         user.setLastLogin(LocalDateTime.now());
         user.setIsDeleted(0);
+
+        Role role = roleService.findById(1L);
+        user.setRoles(Collections.singletonList(role));
+
+
         userService.save(user);
+
+
     }
 
     @Test

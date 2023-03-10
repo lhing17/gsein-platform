@@ -2,17 +2,16 @@ package cn.gsein.platform.system.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-
-import cn.gsein.platform.system.entity.BaseEntity;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "system_permission")
 @Data
-public class Permission extends BaseEntity {
+public class Permission extends BaseEntity implements GrantedAuthority {
 
     /**
     * 主键
@@ -27,5 +26,11 @@ public class Permission extends BaseEntity {
     @Column
     private String name;
 
+    @ManyToMany(mappedBy = "permissions")
+    private List<Role> roles;
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

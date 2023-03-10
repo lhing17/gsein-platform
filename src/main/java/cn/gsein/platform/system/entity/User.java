@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -85,6 +86,15 @@ public class User extends BaseEntity implements UserDetails {
     @Column
     private LocalDateTime lastLogin;
 
+    @ManyToMany
+    @JoinTable(name="system_user_role",
+            joinColumns=
+            @JoinColumn(name="user_id", referencedColumnName="id"),
+            inverseJoinColumns=
+            @JoinColumn(name="role_id", referencedColumnName="id")
+    )
+    private List<Role> roles;
+
     @Override
     public String toString() {
         return "User{" +
@@ -102,10 +112,8 @@ public class User extends BaseEntity implements UserDetails {
                 "} " + super.toString();
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public boolean isAccountNonExpired() {

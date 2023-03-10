@@ -6,6 +6,7 @@ import cn.gsein.platform.system.entity.Result;
 import cn.gsein.platform.system.entity.User;
 import cn.gsein.platform.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('system:user:list')")
     Result<User> getById(@PathVariable Long id) {
         log.info("查询用户信息，id：{}", id);
         return Result.ok(userService.findById(id));

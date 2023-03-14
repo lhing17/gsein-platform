@@ -1,6 +1,7 @@
 package cn.gsein.platform.system.controller;
 
 
+import cn.gsein.platform.system.annotation.SystemLogging;
 import cn.gsein.platform.system.entity.Result;
 import cn.gsein.platform.system.entity.User;
 import cn.gsein.platform.system.service.UserService;
@@ -28,8 +29,8 @@ public class UserController {
     @ApiOperation(value = "根据用户ID获取用户")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @PreAuthorize("hasAuthority('system:user:list')")
+    @SystemLogging
     Result<User> getById(@PathVariable Long id) {
-        log.info("查询用户信息，id：{}", id);
         return Result.ok(userService.findById(id));
     }
 

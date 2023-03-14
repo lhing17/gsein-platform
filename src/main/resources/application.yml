@@ -20,7 +20,7 @@ logging:
 security:
   ignore:
     urls:
-      - /api/v1/user/login"
+      - /api/v1/user/login
       - /swagger-ui.html
       - /swagger-resources/**
       - /doc.html

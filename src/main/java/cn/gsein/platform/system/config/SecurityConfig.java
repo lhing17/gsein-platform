@@ -25,6 +25,8 @@ public class SecurityConfig {
 
     @Resource
     private ExceptionHandlerFilter exceptionHandlerFilter;
+    @Resource
+    private SecurityIgnoreUrl securityIgnoreUrl;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -32,7 +34,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(
                         (authz) -> authz
-                                .antMatchers("/api/v1/user/login").permitAll()
+                                .antMatchers(securityIgnoreUrl.getUrls()).permitAll()
                                 .anyRequest().authenticated()
                 ).httpBasic(withDefaults());
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)

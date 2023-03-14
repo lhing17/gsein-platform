@@ -1,11 +1,14 @@
 package cn.gsein.platform.system.security;
 
+import cn.gsein.platform.system.config.SecurityIgnoreUrl;
 import cn.gsein.platform.system.exception.GseinException;
 import cn.gsein.platform.system.utils.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -16,6 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -24,12 +29,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Resource
     private UserDetailsService userDetailsService;
 
+    @Resource
+    private SecurityIgnoreUrl securityIgnoreUrl;
+
     @Override
     @Transactional
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(AUTHORIZATION);
-        String requestURI = request.getRequestURI();
-        if ("/api/v1/user/login".equals(requestURI)) {
+        Stream<RequestMatcher> matchers = Arrays.stream(securityIgnoreUrl.getUrls()).map(AntPathRequestMatcher::new);
+        if (matchers.anyMatch(matcher -> matcher.matches(request))) {
             filterChain.doFilter(request, response);
             return;
         }

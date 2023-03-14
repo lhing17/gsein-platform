@@ -1,5 +1,7 @@
 package cn.gsein.platform.system.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "system_user")
 @Data
+@ApiModel("用户实体类")
 public class User extends BaseEntity implements UserDetails {
 
     /**
@@ -21,22 +24,27 @@ public class User extends BaseEntity implements UserDetails {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty("主键")
     private Long id;
 
     /**
      * 用户名
      */
     @Column
+    @ApiModelProperty("用户名")
     private String username;
 
     /**
      * 性别 0-男 1-女
      */
+    @Column
+    @ApiModelProperty("性别 0-男 1-女")
     private Integer gender;
     /**
      * 密码
      */
     @Column
+    @ApiModelProperty("密码")
     private String password;
 
     /**
@@ -48,6 +56,7 @@ public class User extends BaseEntity implements UserDetails {
      * 身份证号
      */
     @Column
+    @ApiModelProperty("身份证号")
     private String idCard;
 
 
@@ -55,6 +64,7 @@ public class User extends BaseEntity implements UserDetails {
      * 邮箱
      */
     @Column
+    @ApiModelProperty("邮箱")
     private String email;
 
 
@@ -62,6 +72,7 @@ public class User extends BaseEntity implements UserDetails {
      * 电话
      */
     @Column
+    @ApiModelProperty("电话")
     private String phone;
 
 
@@ -69,21 +80,25 @@ public class User extends BaseEntity implements UserDetails {
      * 生日
      */
     @Column
+    @ApiModelProperty("生日")
     private LocalDateTime birthday;
 
     @Column
+    @ApiModelProperty("年龄")
     private Integer age;
 
     /**
      * 状态 1-正常 2-禁用
      */
     @Column
+    @ApiModelProperty("状态 1-正常 2-禁用")
     private Integer status;
 
     /**
      * 上次登录时间
      */
     @Column
+    @ApiModelProperty("上次登录时间")
     private LocalDateTime lastLogin;
 
     @ManyToMany
@@ -93,6 +108,7 @@ public class User extends BaseEntity implements UserDetails {
             inverseJoinColumns=
             @JoinColumn(name="role_id", referencedColumnName="id")
     )
+    @ApiModelProperty("用户角色")
     private List<Role> roles;
 
     @Override

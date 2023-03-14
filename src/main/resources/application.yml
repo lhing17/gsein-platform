@@ -7,6 +7,7 @@ spring:
   flyway:
     baseline-on-migrate: true
     baseline-version: 20230221001
+
 logging:
   level:
     root: info
@@ -15,3 +16,14 @@ logging:
   logback:
     rollingpolicy:
       file-name-pattern: logs/platform-%d{yyyy-MM-dd}.%i.log
+# 放行的url
+security:
+  ignore:
+    urls:
+      - /api/v1/user/login"
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /doc.html
+      - /v2/api-docs
+      - /webjars/**
+

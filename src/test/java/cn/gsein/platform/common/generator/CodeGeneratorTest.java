@@ -7,8 +7,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 class CodeGeneratorTest {
@@ -26,6 +24,6 @@ class CodeGeneratorTest {
     @Test
     void generate() {
         String basePath = "cn/gsein/platform/system";
-        codeGenerator.generate(basePath, "system_permission", "Permission");
+        codeGenerator.generate(basePath, "system_operation_log", "OperationLog");
     }
 }

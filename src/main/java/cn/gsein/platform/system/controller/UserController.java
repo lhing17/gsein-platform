@@ -1,9 +1,11 @@
 package cn.gsein.platform.system.controller;
 
 
+import cn.gsein.platform.system.annotation.OperationLogging;
 import cn.gsein.platform.system.annotation.SystemLogging;
 import cn.gsein.platform.system.entity.Result;
 import cn.gsein.platform.system.entity.User;
+import cn.gsein.platform.system.enums.OperationType;
 import cn.gsein.platform.system.service.UserService;
 import cn.gsein.platform.system.utils.JwtUtil;
 import io.swagger.annotations.Api;
@@ -54,7 +56,12 @@ public class UserController {
     @ApiOperation(value = "根据用户ID删除用户")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @PreAuthorize("hasAuthority('system:user:remove')")
+    @OperationLogging(value = "删除用户", type = OperationType.DELETE)
     Result<Void> deleteById(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user == null) {
+            return Result.error("id为" + id + "的用户不存在");
+        }
         userService.deleteById(id);
         return Result.ok();
     }

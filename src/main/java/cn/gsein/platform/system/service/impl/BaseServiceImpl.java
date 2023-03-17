@@ -49,6 +49,6 @@ public abstract class BaseServiceImpl<D extends BaseDao<T>, T extends BaseEntity
 
     @Override
     public void deleteById(Long id) {
-        dao.deleteById(id);
+        dao.logicDeleteById(id);
     }
 }

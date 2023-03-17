@@ -79,8 +79,13 @@ public final class CodeGenerator {
         try {
             Template template = configuration.getTemplate(templateName);
 
+            // 如果目录不存在，则创建
+            Path p = Path.of(path);
+            if (!Files.exists(p)) {
+                Files.createDirectories(p);
+            }
 
-            template.process(params, Files.newBufferedWriter(Path.of(path + className + ".java")));
+            template.process(params, Files.newBufferedWriter(Path.of(path, className + ".java")));
         } catch (IOException | TemplateException e) {
             throw new RuntimeException(e);
         }

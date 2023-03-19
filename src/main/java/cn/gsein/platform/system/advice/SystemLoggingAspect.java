@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class SystemLoggingAspect {
 
     /**
-     * 后置通知：记录日志，日志内容为方法名称、方法的参数和返回值
+     * 正常返回后通知：记录日志，日志内容为方法名称、方法的参数和返回值
      */
     @AfterReturning(pointcut = "@annotation(systemLogging)", returning = "result")
     public void afterReturning(JoinPoint joinPoint, SystemLogging systemLogging, Object result) {

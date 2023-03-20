@@ -108,6 +108,7 @@ public class User extends BaseEntity implements UserDetails {
             inverseJoinColumns=
             @JoinColumn(name="role_id", referencedColumnName="id")
     )
+
     @ApiModelProperty("用户角色")
     private List<Role> roles;
 

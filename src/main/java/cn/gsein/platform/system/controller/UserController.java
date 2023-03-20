@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,14 @@ public class UserController {
     @SystemLogging
     Result<User> getById(@PathVariable Long id) {
         return Result.ok(userService.findById(id));
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "获取用户列表")
+    @PreAuthorize("hasAuthority('system:user:list')")
+    @SystemLogging
+    Result<Page<User>> list(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String sort, User user) {
+        return Result.ok(userService.findAll(page, size, sort, user));
     }
 
     @PostMapping("/save")

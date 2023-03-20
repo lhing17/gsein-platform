@@ -33,6 +33,16 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 - ...
 
 ## 问题解决记录(trouble shooting)
+1. 实体中的字段为null时，会导致sql语句中的字段值为null，而不是数据库中的默认值。
+    - 可以使用@DynamicInsert@DynamicUpdate注解，但是这样会导致没有办法将字段值更新为null。
+
+2. BaseEntity中的字段没有和数据库中的字段形成映射。
+    - 在BaseEntity中添加@MappedSuperclass注解，表示该类是一个基类。
+
+3. 关联关系的实体在序列化时会出现死循环。
+    - 在实体类的字段上添加@JsonIgnore注解，表示该字段不参与序列化。
+    - 在实体类中添加@JsonBackReference注解，表示该字段不参与序列化。该注解与@JsonManagedReference注解配合使用。
+
 
 
 ## QQ交流群

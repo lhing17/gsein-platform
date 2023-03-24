@@ -13,7 +13,10 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "types": ["vite/client"],
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts"],
   "exclude": ["node_modules/**/*"]

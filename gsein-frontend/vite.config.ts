@@ -12,4 +12,19 @@ export default defineConfig({
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/locales/**'),
     }),
   ],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': resolve(dirname(fileURLToPath(import.meta.url)), './src'),
+    }
+  }
 })

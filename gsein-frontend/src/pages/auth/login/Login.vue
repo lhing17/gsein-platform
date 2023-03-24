@@ -35,6 +35,7 @@
   import { computed, ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { useI18n } from 'vue-i18n'
+  // import { login } from '@/services/api/login'
   const { t } = useI18n()
 
   const email = ref('')
@@ -49,9 +50,10 @@
   function onsubmit() {
     if (!formReady.value) return
 
+    // login()
     emailErrors.value = email.value ? [] : ['Email is required']
     passwordErrors.value = password.value ? [] : ['Password is required']
 
-    router.push({ name: 'dashboard' })
+    // router.push({ name: 'dashboard' })
   }
 </script>

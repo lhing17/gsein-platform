@@ -1,5 +1,9 @@
 import axios from "axios";
 import router from "@/router";
+import store from "@/stores";
+import { useGlobalStore } from "@/stores/global-store";
+
+const GlobalStore = useGlobalStore(store);
 
 const instance = axios.create({
   timeout: 5000
@@ -7,8 +11,8 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    // 在每个请求头中加入token，如果有的话，token存储在localStorage中
-    const token = localStorage.getItem("token");
+    // 在每个请求头中加入token，如果有的话，token存储在全局store中
+    const token = GlobalStore.token;
     if (token && config.headers) {
       config.headers.Authorization = token;
     }

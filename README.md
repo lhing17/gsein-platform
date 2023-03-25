@@ -25,11 +25,23 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 8. 其他常用功能：系统参数配置、在线状态监控
 
 ## 技术选型
+### 后端技术
+从零开始搭建的maven工程
 - Spring boot 基础框架
 - Spring security 安全框架，用于身份认证和鉴权
 - Spring data jpa 持久层框架，底层为hibernate实现
 - JWT 生成token
 - Flyway 数据库迁移(migration)
+- ...
+
+### 前端技术
+使用Vuestic Admin作为前端模板
+- Vue.js 前端框架 Vue3.x版本
+- vite 前端构建工具
+- Vuestic UI 前端UI框架
+- pinia 状态管理
+- axios 网络请求
+- yarn/npm 包管理工具
 - ...
 
 ## 问题解决记录(trouble shooting)
@@ -46,4 +58,4 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 
 
 ## QQ交流群
-[![加入QQ群](https://img.shields.io/badge/763122883-blue.svg)](https://jq.qq.com/?_wv=1027&k=GfZCRmow)
+欢迎加入QQ群进行技术交流：[![加入QQ群](https://img.shields.io/badge/763122883-blue.svg)](https://jq.qq.com/?_wv=1027&k=GfZCRmow)

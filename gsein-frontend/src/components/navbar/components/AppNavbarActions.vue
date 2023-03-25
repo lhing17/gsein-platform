@@ -1,6 +1,21 @@
 <template>
   <div class="app-navbar-actions">
-    <color-dropdown class="app-navbar-actions__item" />
+    <va-switch
+      v-model="value"
+      color="#5123a1"
+      off-color="#ffd300"
+      style="--va-switch-checker-background-color: #252723;"
+    >
+      <template #innerLabel>
+        <div class="va-text-center">
+          <va-icon
+            size="24px"
+            :name="value ? 'dark_mode' : 'light_mode'"
+          />
+        </div>
+      </template>
+    </va-switch>
+<!--    <color-dropdown class="app-navbar-actions__item" />-->
     <message-dropdown class="app-navbar-actions__item" />
     <notification-dropdown class="app-navbar-actions__item" />
     <!-- <settings-dropdown class="app-navbar-actions__item" /> -->
@@ -17,6 +32,10 @@
   import NotificationDropdown from './dropdowns/NotificationDropdown.vue'
   import MessageDropdown from './dropdowns/MessageDropdown.vue'
   import ColorDropdown from './dropdowns/ColorDropdown.vue'
+  import { ref } from "@vue/reactivity";
+  import { useColors } from "vuestic-ui";
+  import { watchEffect } from "vue";
+  const { presets, applyPreset } = useColors()
 
   withDefaults(
     defineProps<{
@@ -32,6 +51,13 @@
   defineEmits<{
     (e: 'update:isTopBar', isTopBar: boolean): void
   }>()
+
+  const value = ref(false)
+
+  watchEffect(() => {
+    let theme = value.value ? 'dark' : 'light'
+    applyPreset(theme)
+  })
 
   // const isTopBarProxy = computed({
   //   get() {

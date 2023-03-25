@@ -10,32 +10,11 @@
         />
         <router-link to="/">
           <span>吉森开发平台</span>
-<!--          <vuestic-logo class="logo" />-->
         </router-link>
       </div>
     </template>
-<!--    <template #center>-->
-<!--      <div class="app-navbar-center">-->
-<!--        <span class="app-navbar-center__text mr-2">{{ t('navbar.messageUs') }}</span>-->
-<!--        <a-->
-<!--          class="app-navbar-center__mail mr-2"-->
-<!--          href="mailto:hello@epicmax.co"-->
-<!--          target="_blank"-->
-<!--          :style="{ color: colors.primary }"-->
-<!--        >-->
-<!--          hello@epicmax.co-->
-<!--        </a>-->
-<!--        <va-button-->
-<!--          href="https://github.com/epicmaxco/vuestic-admin"-->
-<!--          color="#000000"-->
-<!--          class="app-navbar-center__github-button"-->
-<!--          icon="github"-->
-<!--          target="_blank"-->
-<!--        >-->
-<!--          {{ t('navbar.repository') }}-->
-<!--        </va-button>-->
-<!--      </div>-->
-<!--    </template>-->
+    <template #center>
+    </template>
     <template #right>
       <app-navbar-actions class="app-navbar__actions md5 lg4" :user-name="userName" />
     </template>
@@ -48,7 +27,6 @@
   import { useGlobalStore } from '../../stores/global-store'
   import { useI18n } from 'vue-i18n'
   import { useColors } from 'vuestic-ui'
-  import VuesticLogo from '../VuesticLogo.vue'
   import VaIconMenuCollapsed from '../icons/VaIconMenuCollapsed.vue'
   import AppNavbarActions from './components/AppNavbarActions.vue'
 

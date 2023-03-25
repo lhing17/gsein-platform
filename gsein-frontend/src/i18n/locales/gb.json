@@ -4,6 +4,7 @@
     "createAccount": "Create account",
     "createNewAccount": "Create New Account",
     "email": "Email",
+    "username": "Username",
     "login": "Login",
     "password": "Password",
     "recover_password": "Recover password",

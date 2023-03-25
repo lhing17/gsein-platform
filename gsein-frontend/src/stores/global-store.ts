@@ -28,7 +28,8 @@ export const useGlobalStore = defineStore("global", {
     strategies: [
       {
         storage: localStorage,
-        paths: ["token"]
+        paths: ["token"],
+        key: "token"
       }
     ]
   }

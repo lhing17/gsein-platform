@@ -6,7 +6,6 @@ import Page404Layout from "../layouts/Page404Layout.vue";
 
 import RouteViewComponent from "../layouts/RouterBypass.vue";
 import UIRoute from "../pages/admin/ui/route";
-import store from "@/stores";
 import { useGlobalStore } from "@/stores/global-store";
 
 const routes: Array<RouteRecordRaw> = [
@@ -228,14 +227,14 @@ const router = createRouter({
   routes
 });
 
-const GlobalStore = useGlobalStore(store);
+
 // 未登录跳转到登录页面
 router.beforeEach((to, from, next) => {
   if (!!to.meta && to.meta.auth === false) {
     next();
     return;
   }
-
+  const GlobalStore = useGlobalStore();
   if (!GlobalStore.token) {
     next({
       path: "/auth/login",
@@ -243,6 +242,8 @@ router.beforeEach((to, from, next) => {
         path: to.fullPath
       }
     });
+  } else {
+    next();
   }
 
 });

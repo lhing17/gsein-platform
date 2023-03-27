@@ -19,6 +19,19 @@ export default {
       },
     },
     {
+      name: 'system',
+      displayName: 'menu.system',
+      meta: {
+        icon: 'vuestic-iconset-system',
+      },
+      children: [
+        {
+          name: 'role',
+          displayName: 'menu.role',
+        }
+      ]
+    },
+    {
       name: 'statistics',
       displayName: 'menu.statistics',
       meta: {

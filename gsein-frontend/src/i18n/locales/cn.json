@@ -176,7 +176,9 @@
     "treeView": "树视图",
     "dateTimePickers": "日期时间选择器",
     "fileUpload": "文件上传",
-    "chat": "聊天"
+    "chat": "聊天",
+    "system": "系统管理",
+    "role": "角色管理"
   },
   "messages": {
     "all": "查看全部消息",
@@ -267,8 +269,11 @@
     "headings": {
       "city": "城市",
       "email": "电子邮箱",
-      "name": "姓名",
-      "score": "分数"
+      "name": "名称",
+      "score": "分数",
+      "id": "ID",
+      "roleKey": "角色Key",
+      "sort": "排序",
     },
     "dataTable": {
       "noDataAvailable": "无可用数据"

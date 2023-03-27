@@ -1,5 +1,6 @@
 package cn.gsein.platform.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -47,6 +48,7 @@ public class Role extends BaseEntity {
 
     @ApiModelProperty(hidden = true)
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<User> users;
 
     @ApiModelProperty(hidden = true)

@@ -24,6 +24,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../pages/admin/dashboard/Dashboard.vue")
       },
       {
+        name: "system",
+        path: "system",
+        component: RouteViewComponent,
+        children: [
+          {
+            name: "role",
+            path: "role",
+            component: () => import("../pages/admin/system/role/Role.vue")
+          }
+        ]
+      },
+      {
         name: "statistics",
         path: "statistics",
         component: RouteViewComponent,

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,6 +36,12 @@ public class RoleController {
     @GetMapping("/{id}")
     Result<Role> getById(@PathVariable Long id) {
         return Result.ok(roleService.findById(id));
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "获取角色列表", notes = "获取角色列表", httpMethod = "GET")
+    Result<Page<Role>> list (@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String sort, Role role) {
+        return Result.ok(roleService.findAll(page, size, sort, role));
     }
 
     /**

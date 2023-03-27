@@ -63,8 +63,10 @@ async function onsubmit() {
   if (usernameErrors.value.length || passwordErrors.value.length) return;
 
   const response = await login(username.value, password.value);
+
   const GlobalStore = useGlobalStore();
   GlobalStore.changeToken(response.data);
+
   // 如果query.path存在，就跳转到query.path，否则跳转到dashboard
   const { path } = route.query;
   if (path && typeof path === "string") {

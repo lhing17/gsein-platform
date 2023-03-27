@@ -2,6 +2,7 @@ import axios from "axios";
 import router from "@/router";
 
 import { useGlobalStore } from "@/stores/global-store";
+import { useToast } from "vuestic-ui";
 
 
 const instance = axios.create({
@@ -24,6 +25,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
+    // console.log(response)
+    if (response.data && response.data.code === 500) {
+      const { init } = useToast();
+      init({
+        message: response.data.message,
+      })
+    }
     return response;
   },
   (error) => {

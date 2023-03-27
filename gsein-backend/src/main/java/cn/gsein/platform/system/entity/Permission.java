@@ -1,5 +1,6 @@
 package cn.gsein.platform.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class Permission extends BaseEntity implements GrantedAuthority {
 
     @ApiModelProperty(hidden = true)
     @ManyToMany(mappedBy = "permissions")
+    @JsonIgnore
     private List<Role> roles;
 
     @Override

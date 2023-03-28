@@ -32,6 +32,7 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 - Spring data jpa 持久层框架，底层为hibernate实现
 - JWT 生成token
 - Flyway 数据库迁移(migration)
+- 使用xxl-job作为定时任务调度器
 - ...
 
 ### 前端技术
@@ -43,6 +44,67 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 - axios 网络请求
 - yarn/npm 包管理工具
 - ...
+
+## 项目结构
+```
+├─gsein-platform
+│  ├─doc 项目文档
+|  ├─gsein-backend 后端项目
+|  ├─gsein-frontend 前端项目
+|  ├─xxl-job-admin 定时任务调度器
+```
+
+## 项目运行
+### 后端项目
+1. 创建数据库platform
+2. 修改application.yml中的数据库连接信息
+3. 使用IDEA打开项目，运行GseinPlatformApplication.java，或者使用maven命令：mvn spring-boot:run
+4. 访问http://localhost:8080/doc.html，查看接口文档是否能够正常访问
+
+### 前端项目
+1. 安装node.js
+2. 安装yarn
+3. 进入gsein-frontend目录，执行yarn install
+4. 执行yarn dev
+5. 访问http://localhost:3000，查看前端页面是否能够正常访问
+
+### 定时任务调度器
+1. 执行doc/db/tables_xxl_job.sql，创建数据库和表
+2. 修改application.properties中的数据库连接信息
+3. 使用IDEA打开项目，运行XxlJobAdminApplication.java，或者使用maven命令：mvn spring-boot:run
+4. 访问http://localhost:8081/xxl-job-admin，查看定时任务调度器页面是否能够正常访问
+5. 查看控制台日志，查看后端项目是否能够正常调用定时任务调度器
+6. 查看数据库表xxl_job_log，查看定时任务调度器是否能够正常记录日志
+
+## 项目部署
+### 后端项目
+1. 修改application.yml中的数据库连接信息
+2. 使用maven命令：mvn clean package -Dmaven.test.skip=true
+3. 将target目录下的gsein-platform-0.0.1-SNAPSHOT.jar改名后拷贝到服务器上
+4. 使用nohup命令启动jar包：nohup java -jar XXX.jar &
+5. 访问http://ip:8080/doc.html，查看接口文档是否能够正常访问
+6. 查看控制台日志，查看后端项目是否能够正常启动
+
+### 前端项目
+1. 安装node.js
+2. 安装yarn
+3. 进入gsein-frontend目录，执行yarn install
+4. 执行yarn build
+5. 将dist目录下的文件拷贝到nginx服务器上，配置nginx的反向代理
+6. 访问nginx地址，查看前端页面是否能够正常访问
+
+### 定时任务调度器
+1. 在服务器的数据库中执行doc/db/tables_xxl_job.sql，创建数据库和表
+2. 修改application.properties中的数据库连接信息
+3. 使用maven命令：mvn clean package -Dmaven.test.skip=true
+4. 将target目录下的xxl-job-admin-2.3.0.jar改名后拷贝到服务器上
+5. 使用nohup命令启动jar包：nohup java -jar XXX.jar &
+6. 访问http://ip:8081/xxl-job-admin，查看定时任务调度器页面是否能够正常访问
+7. 查看控制台日志，查看后端项目是否能够正常调用定时任务调度器
+8. 查看数据库表xxl_job_log，查看定时任务调度器是否能够正常记录日志
+
+## 项目演示地址
+待补充
 
 ## 问题解决记录(trouble shooting)
 1. 实体中的字段为null时，会导致sql语句中的字段值为null，而不是数据库中的默认值。

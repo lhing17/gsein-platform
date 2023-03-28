@@ -33,7 +33,7 @@
           <template #cell(actions)="{rowIndex}">
             <va-button-group>
               <va-button
-                @click="edit(rowIndex)"
+                @click="editRow(rowIndex)"
                 color="primary"
                 size="small"
                 class="mr-2"
@@ -79,7 +79,11 @@
           </div>
         </div>
       </va-card-content>
-
+      <role-modal
+        :id="id"
+        :edited-item="editedItem"
+        :shown="modalShown"
+        @close="hideModal" />
 
     </va-card>
 
@@ -88,9 +92,10 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { deleteRole, roleList } from "@/services/role";
+import { deleteRole, roleList } from "@/services/api/role";
 import { DataTableItem, DataTableSortingOrder, useModal } from "vuestic-ui";
 import { Ref } from "@vue/reactivity";
+import RoleModal from "@/pages/admin/system/role/RoleModal.vue";
 
 const { t } = useI18n();
 const { confirm } = useModal();
@@ -136,6 +141,26 @@ async function loadData() {
   pageStart.value = (page.value - 1) * size.value + 1;
   pageEnd.value = page.value * size.value;
   total.value = response.data.totalElements;
+}
+
+const id = ref(0);
+const editedItem = ref({});
+const modalShown = ref(false);
+
+function editRow(rowIndex: number) {
+  id.value = roles.value[rowIndex].id;
+  const role = roles.value[rowIndex];
+  editedItem.value = {
+    name: role.name,
+    roleKey: role.roleKey,
+    sort: role.sort
+  };
+  modalShown.value = true;
+}
+
+function hideModal() {
+  modalShown.value = false;
+  loadData()
 }
 
 async function deleteRow(rowIndex: number) {

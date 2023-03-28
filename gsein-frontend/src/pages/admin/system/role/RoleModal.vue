@@ -8,9 +8,9 @@
     @cancel="resetEditedItem"
   >
     <va-input
-      v-for="key in Object.keys(editedItem)"
+      v-for="key in Object.keys(realEditedItem)"
       :key="key"
-      v-model="editedItem[key]"
+      v-model="realEditedItem[key]"
       class="my-3"
       :label="key"
     />
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { addRole, getRoleById, updateRole } from "@/services/api/role";
+import { ref, watchEffect } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -35,16 +36,21 @@ const props = withDefaults(
   }
 );
 
+const realEditedItem = ref(props.editedItem);
+watchEffect(() => {
+  realEditedItem.value = props.editedItem;
+});
+
 async function saveOrUpdate() {
   // 获取props中的id
   const { id } = props;
   if (id === 0) {
     // 新增
-    await addRole(props.editedItem);
+    await addRole(realEditedItem.value);
   } else {
     // 修改
     let role = await getRoleById(id);
-    role = { ...role.data, ...props.editedItem };
+    role = { ...role.data, ...realEditedItem.value };
     await updateRole(role);
   }
   emit("close");

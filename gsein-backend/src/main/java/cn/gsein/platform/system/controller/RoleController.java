@@ -40,8 +40,8 @@ public class RoleController {
 
     @GetMapping("/list")
     @ApiOperation(value = "获取角色列表", notes = "获取角色列表", httpMethod = "GET")
-    Result<Page<Role>> list (@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String sort, Role role) {
-        return Result.ok(roleService.findAll(page, size, sort, role));
+    Result<Page<Role>> list (@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String sorting, Role role) {
+        return Result.ok(roleService.findAll(page, size, sorting, role));
     }
 
     /**

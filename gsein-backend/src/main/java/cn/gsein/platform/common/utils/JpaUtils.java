@@ -3,6 +3,8 @@ package cn.gsein.platform.common.utils;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
+
 public final class JpaUtils {
     private JpaUtils() {
     }
@@ -28,5 +30,27 @@ public final class JpaUtils {
             }
         }
         return Sort.by(orders);
+    }
+
+    /**
+     * 将实体类中的空字符串设置为null
+     */
+    public static void setEmptyStringToNull(Object entity) {
+        // 使用反射获取实体类中的所有属性
+        Field[] fields = entity.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            // 设置私有属性可访问
+            field.setAccessible(true);
+            try {
+                // 获取属性值
+                Object value = field.get(entity);
+                if (value instanceof String && !StringUtils.hasText((String) value)) {
+                    // 如果属性值是空字符串，设置为null
+                    field.set(entity, null);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

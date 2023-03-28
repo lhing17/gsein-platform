@@ -8,12 +8,14 @@ import cn.gsein.platform.system.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
 public abstract class BaseServiceImpl<D extends BaseDao<T>, T extends BaseEntity> implements BaseService<T> {
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     protected D dao;
 
@@ -50,8 +52,16 @@ public abstract class BaseServiceImpl<D extends BaseDao<T>, T extends BaseEntity
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long id) {
-        dao.logicDeleteById(id);
+        dao.findById(id)
+                .ifPresent(entity -> {
+                    SecurityUtils.getLoginUser()
+                            .ifPresent(user -> entity.setUpdatedBy(user.getId()));
+                    entity.setUpdatedTime(LocalDateTime.now());
+                    entity.setIsDeleted(1);
+                    dao.save(entity);
+                });
     }
 
     @Override

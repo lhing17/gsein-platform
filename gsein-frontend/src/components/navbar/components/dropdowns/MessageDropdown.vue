@@ -1,7 +1,8 @@
 <template>
   <va-dropdown class="message-dropdown" position="bottom" :offset="[13, 0]">
     <template #anchor>
-      <va-icon-message class="message-dropdown__icon" :class="{ 'message-dropdown__icon--unread': !allRead }" />
+      <va-icon name="all_inbox" size="large"/>
+<!--      <va-icon-message class="message-dropdown__icon" :class="{ 'message-dropdown__icon&#45;&#45;unread': !allRead }" />-->
     </template>
 
     <va-dropdown-content class="message-dropdown__content pl-4 pr-4 pt-2 pb-2">
@@ -12,7 +13,7 @@
         :class="{ 'message-dropdown__item--unread': message.unread }"
         @click="message.unread = false"
       >
-        <img :src="message.details.avatar" class="message-dropdown__item__avatar mr-2" />
+        <img alt="头像" :src="message.details.avatar" class="message-dropdown__item__avatar mr-2" />
         <span class="ellipsis" style="max-width: 85%">{{
           t(`messages.${message.name}`, { name: message.details.name })
         }}</span>
@@ -36,8 +37,6 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-
-  import VaIconMessage from '../../../icons/VaIconMessage.vue'
 
   const { t } = useI18n()
 

@@ -1,10 +1,12 @@
 <template>
   <va-dropdown class="notification-dropdown" position="bottom" :offset="[13, 0]">
     <template #anchor>
-      <va-icon-notification
-        class="notification-dropdown__icon"
-        :class="{ 'notification-dropdown__icon--unread': !allRead }"
-      />
+
+      <va-icon name="notification_important" size="large"/>
+<!--      <va-icon-notification-->
+<!--        class="notification-dropdown__icon"-->
+<!--        :class="{ 'notification-dropdown__icon&#45;&#45;unread': !allRead }"-->
+<!--      />-->
     </template>
     <va-dropdown-content class="notification-dropdown__content pl-3 pr-3 pt-2 pb-2">
       <div
@@ -15,6 +17,7 @@
         @click="notification.unread = false"
       >
         <img
+          alt="头像"
           v-if="notification.details.avatar"
           class="mr-2 notification-dropdown__item__avatar"
           :src="notification.details.avatar"
@@ -43,7 +46,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import VaIconNotification from '../../../icons/VaIconNotification.vue'
 
   const { t } = useI18n()
 

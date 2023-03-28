@@ -22,7 +22,9 @@
     "pressed": "按下",
     "small": "小的",
     "query": "查询",
-    "reset": "重置"
+    "reset": "重置",
+    "edit": "编辑",
+    "delete": "删除"
   },
   "charts": {
     "horizontalBarChart": "横条图",
@@ -275,7 +277,8 @@
       "score": "分数",
       "id": "ID",
       "roleKey": "角色Key",
-      "sort": "排序"
+      "sort": "排序",
+      "actions": "操作"
     },
     "dataTable": {
       "noDataAvailable": "无可用数据"

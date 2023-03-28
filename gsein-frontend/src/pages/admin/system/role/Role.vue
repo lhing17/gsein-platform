@@ -23,13 +23,32 @@
             </va-button>
           </div>
         </div>
-        <va-divider/>
+        <va-divider />
         <va-data-table
           :items="roles"
           :columns="columns"
           v-model:sort-by="sortBy"
           v-model:sorting-order="sortingOrder"
         >
+          <template #cell(actions)="{rowIndex}">
+            <va-button-group>
+              <va-button
+                @click="edit(rowIndex)"
+                color="primary"
+                size="small"
+                class="mr-2"
+              >
+                {{ t("buttons.edit") }}
+              </va-button>
+              <va-button
+                @click="deleteRow(rowIndex)"
+                color="danger"
+                size="small"
+              >
+                {{ t("buttons.delete") }}
+              </va-button>
+            </va-button-group>
+          </template>
         </va-data-table>
         <div class="table--pagination justify-center">
           <div class="justify-center">
@@ -69,12 +88,12 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { roleList } from "@/services/role";
-import { DataTableItem, DataTableSortingOrder } from "vuestic-ui";
-import { DataTableColumnSource } from "vuestic-ui/dist/types/components/va-data-table/types";
+import { deleteRole, roleList } from "@/services/role";
+import { DataTableItem, DataTableSortingOrder, useModal } from "vuestic-ui";
 import { Ref } from "@vue/reactivity";
 
 const { t } = useI18n();
+const { confirm } = useModal();
 
 const options = [10, 20, 50, 100];
 const page = ref(1);
@@ -102,11 +121,12 @@ const query = ref({
 });
 
 // 只显示id、name、roleKey、sort
-const columns: DataTableColumnSource[] = [
+const columns = [
   { key: "id", label: t("tables.headings.id"), sortable: true },
   { key: "name", label: t("tables.headings.name") },
   { key: "roleKey", label: t("tables.headings.roleKey") },
-  { key: "sort", label: t("tables.headings.sort") }
+  { key: "sort", label: t("tables.headings.sort") },
+  { key: "actions", label: t("tables.headings.actions") }
 ];
 
 async function loadData() {
@@ -116,6 +136,21 @@ async function loadData() {
   pageStart.value = (page.value - 1) * size.value + 1;
   pageEnd.value = page.value * size.value;
   total.value = response.data.totalElements;
+}
+
+async function deleteRow(rowIndex: number) {
+  const ok = await confirm({
+    title: t("messages.confirm"),
+    message: t("messages.confirmDelete"),
+    okText: t("buttons.confirm"),
+    cancelText: t("buttons.cancel")
+  });
+  if (!ok) {
+    return;
+  }
+  const id = roles.value[rowIndex].id;
+  await deleteRole(id);
+  await loadData();
 }
 
 function reset() {
@@ -131,13 +166,14 @@ function reset() {
 }
 
 watch([page, size, sorting], loadData);
-loadData()
+loadData();
 
 
 </script>
 <style lang="scss" scoped>
 .markup-tables {
   height: calc(100vh - 112px);
+
   .table-wrapper {
     overflow: auto;
   }
@@ -159,12 +195,15 @@ loadData()
 .table--query:deep(.va-input-wrapper__label) {
   height: 14px;
 }
+
 .va-card {
   height: 100%;
 }
+
 .va-card__content {
   height: calc(100% - 55px);
 }
+
 .va-data-table {
   height: calc(100% - 97px);
 }

@@ -12,4 +12,9 @@ const roleList = async (page: number, size: number, sorting: String, condition: 
   return response.data;
 };
 
-export { roleList };
+const deleteRole = async (id: number) => {
+  const response = await request.delete(`/api/v1/role/${id}`);
+  return response.data;
+};
+
+export { roleList, deleteRole };

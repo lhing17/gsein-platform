@@ -24,6 +24,11 @@
           </div>
         </div>
         <va-divider />
+        <div>
+          <va-button @click="addRow">
+            {{ t("buttons.add") }}
+          </va-button>
+        </div>
         <va-data-table
           :items="roles"
           :columns="columns"
@@ -154,6 +159,16 @@ function editRow(rowIndex: number) {
     name: role.name,
     roleKey: role.roleKey,
     sort: role.sort
+  };
+  modalShown.value = true;
+}
+
+function addRow() {
+  id.value = 0;
+  editedItem.value = {
+    name: "",
+    roleKey: "",
+    sort: 0
   };
   modalShown.value = true;
 }

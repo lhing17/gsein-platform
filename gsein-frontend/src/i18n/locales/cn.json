@@ -24,7 +24,8 @@
     "query": "查询",
     "reset": "重置",
     "edit": "编辑",
-    "delete": "删除"
+    "delete": "删除",
+    "add": "新增"
   },
   "charts": {
     "horizontalBarChart": "横条图",

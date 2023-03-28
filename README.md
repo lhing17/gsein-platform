@@ -37,7 +37,7 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 
 ### 前端技术
 使用Vuestic Admin作为前端模板
-- Vue.js 前端框架 Vue3.x版本
+- Vue.js 前端框架 Vue3.x版本，采用Composition API（组合式）的代码风格
 - vite 前端构建工具
 - Vuestic UI 前端UI框架
 - pinia 状态管理
@@ -72,7 +72,7 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 1. 执行doc/db/tables_xxl_job.sql，创建数据库和表
 2. 修改application.properties中的数据库连接信息
 3. 使用IDEA打开项目，运行XxlJobAdminApplication.java，或者使用maven命令：mvn spring-boot:run
-4. 访问http://localhost:8081/xxl-job-admin，查看定时任务调度器页面是否能够正常访问
+4. 访问http://localhost:8081/xxl-job-admin，查看定时任务调度器页面是否能够正常访问，默认账号密码为admin/123456
 5. 查看控制台日志，查看后端项目是否能够正常调用定时任务调度器
 6. 查看数据库表xxl_job_log，查看定时任务调度器是否能够正常记录日志
 

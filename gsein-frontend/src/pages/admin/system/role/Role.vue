@@ -5,6 +5,7 @@
       <va-card-title>{{ t("menu.role") }}</va-card-title>
 
       <va-card-content>
+
         <div class="table--query row">
           <va-input v-model="query.name"
                     label="名称"
@@ -14,14 +15,15 @@
                     class="flex flex-col md3" />
           <va-spacer />
           <div class="flex justify-center">
-            <va-button @click="loadData" color="primary" class="mr-2">
+            <va-button @click="loadData" class="mr-2">
               {{ t("buttons.query") }}
             </va-button>
-            <va-button @click="reset" color="primary">
+            <va-button @click="reset" preset="secondary" border-color="primary">
               {{ t("buttons.reset") }}
             </va-button>
           </div>
         </div>
+        <va-divider/>
         <va-data-table
           :items="roles"
           :columns="columns"
@@ -135,6 +137,7 @@ loadData()
 </script>
 <style lang="scss" scoped>
 .markup-tables {
+  height: calc(100vh - 112px);
   .table-wrapper {
     overflow: auto;
   }
@@ -155,5 +158,14 @@ loadData()
 
 .table--query:deep(.va-input-wrapper__label) {
   height: 14px;
+}
+.va-card {
+  height: 100%;
+}
+.va-card__content {
+  height: calc(100% - 55px);
+}
+.va-data-table {
+  height: calc(100% - 97px);
 }
 </style>

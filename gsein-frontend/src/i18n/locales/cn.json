@@ -20,7 +20,9 @@
     "main": "主按钮和辅助按钮",
     "micro": "微型的",
     "pressed": "按下",
-    "small": "小的"
+    "small": "小的",
+    "query": "查询",
+    "reset": "重置"
   },
   "charts": {
     "horizontalBarChart": "横条图",
@@ -273,7 +275,7 @@
       "score": "分数",
       "id": "ID",
       "roleKey": "角色Key",
-      "sort": "排序",
+      "sort": "排序"
     },
     "dataTable": {
       "noDataAvailable": "无可用数据"

@@ -245,6 +245,6 @@ loadData();
 }
 
 .va-data-table {
-  height: calc(100% - 97px);
+  height: calc(100% - 133px);
 }
 </style>

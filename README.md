@@ -1,20 +1,17 @@
-# gsein-platform
-从零开始搭建开发平台
+# gsein-platform（吉森开发平台）
+吉森开发平台是一个后台管理系统的脚手架项目，可以在本项目的基础上快速开始后端管理平台的开发。
 
-所有搭建过程在B站通过视频方式记录
+## 本项目的特性
+1. 从零开始搭建的开发平台，主要搭建过程都在B站通过视频方式进行了记录，B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917eace06e9e149bf0c2eaf681f7af
+2. 本平台致力于满足各种快速开发的场景，以简单和高效为主要出发点，不追求过于复杂的架构和技术。
+3. 平台支持代码生成，常用的代码均可以通过代码生成器生成，大大减少了编写样本代码的时间。
+4. 支持记录系统运行日志、业务操作日志（包括登录、操作、异常等），方便问题的调试。
+5. 快速创建定时任务。
+6. 在线展示接口文档，接口文档支持接口调试。
+7. 支持对数据库连接的监控。
+8. 支持基于角色和权限的细粒度的系统鉴权。
 
-B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917eace06e9e149bf0c2eaf681f7af
-
-## 规划特性
-### 系统层面
-1. 支持代码生成
-2. 日志：系统日志、业务日志（登录、操作、异常）
-3. 定时任务
-4. 接口文档
-5. 监控数据库连接池状态
-6. 系统鉴权——对应用户、角色、权限管理
-
-### 业务层面
+## 内置功能模块
 1. 用户管理
 2. 角色管理/权限管理
 3. 菜单管理
@@ -33,6 +30,8 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 - JWT 生成token
 - Flyway 数据库迁移(migration)
 - 使用xxl-job作为定时任务调度器
+- knife4j作为接口文档的门面
+- alibaba druid作为数据库连接池
 - ...
 
 ### 前端技术
@@ -54,7 +53,7 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 |  ├─xxl-job-admin 定时任务调度器
 ```
 
-## 项目运行
+## 项目运行(开发环境)
 ### 后端项目
 1. 创建数据库platform
 2. 修改application.yml中的数据库连接信息
@@ -105,17 +104,6 @@ B站视频地址：https://www.bilibili.com/video/BV1ee4y1c7ub/?vd_source=6e917e
 
 ## 项目演示地址
 待补充
-
-## 问题解决记录(trouble shooting)
-1. 实体中的字段为null时，会导致sql语句中的字段值为null，而不是数据库中的默认值。
-    - 可以使用@DynamicInsert@DynamicUpdate注解，但是这样会导致没有办法将字段值更新为null。
-
-2. BaseEntity中的字段没有和数据库中的字段形成映射。
-    - 在BaseEntity中添加@MappedSuperclass注解，表示该类是一个基类。
-
-3. 关联关系的实体在序列化时会出现死循环。
-    - 在实体类的字段上添加@JsonIgnore注解，表示该字段不参与序列化。
-    - 在实体类中添加@JsonBackReference注解，表示该字段不参与序列化。该注解与@JsonManagedReference注解配合使用。
 
 
 

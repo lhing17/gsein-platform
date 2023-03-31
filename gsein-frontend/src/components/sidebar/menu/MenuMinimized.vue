@@ -2,7 +2,7 @@
   <va-dropdown
     v-for="(route, idx) in items"
     :key="idx"
-    v-model="dropdownsValue[idx]"
+    :model-value="!!dropdownsValue[idx]"
     placement="right-start"
     prevent-overflow
     :offset="[1, 0]"
@@ -14,7 +14,7 @@
           <va-icon
             v-if="route.children"
             class="more_icon"
-            :name="dropdownsValue[idx] ? 'chevron_left' : 'chevron_right'"
+            :name="!!dropdownsValue[idx] ? 'chevron_left' : 'chevron_right'"
           />
         </va-sidebar-item-content>
       </va-sidebar-item>

@@ -44,7 +44,6 @@ const columns = [
   { key: "actions", label: t("tables.headings.actions") }
 ];
 
-
 const id = ref(0);
 const editedItem = ref({});
 const modalShown = ref(false);
@@ -81,7 +80,7 @@ async function reset() {
     name: "",
     roleKey: ""
   };
-  await nextTick(async () => await roleTable.value.loadData());
+  await nextTick(roleTable.value.loadData);
 }
 
 

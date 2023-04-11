@@ -53,7 +53,7 @@ const route = useRoute();
 const formReady = computed(() => !usernameErrors.value.length && !passwordErrors.value.length);
 
 async function onsubmit() {
-  if (!formReady.value) return;
+  // if (!formReady.value) return;
 
   // login()
   usernameErrors.value = username.value ? [] : ["Username is required"];

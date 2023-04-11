@@ -26,11 +26,22 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     // console.log(response)
-    if (response.data && response.data.code === 500) {
-      const { init } = useToast();
-      init({
-        message: response.data.message,
-      })
+    if (response.data ) {
+      if (response.data.code === 500) {
+        const { init } = useToast();
+        init({
+          message: response.data.message,
+        })
+        return Promise.reject(response.data);
+      }
+      if (response.data.code.toString().startsWith("401")) {
+        // 返回 401开头的状态码 清除token信息并跳转到登录页面
+        localStorage.removeItem("token");
+
+        const GlobalStore = useGlobalStore();
+        GlobalStore.changeToken("");
+        router.push({ path: "/auth/login" });
+      }
     }
     return response;
   },

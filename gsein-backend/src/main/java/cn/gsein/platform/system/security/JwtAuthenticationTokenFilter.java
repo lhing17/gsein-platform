@@ -1,6 +1,7 @@
 package cn.gsein.platform.system.security;
 
 import cn.gsein.platform.system.config.SecurityIgnoreUrl;
+import cn.gsein.platform.system.enums.ErrorCode;
 import cn.gsein.platform.system.exception.GseinException;
 import cn.gsein.platform.system.utils.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,15 +44,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         if (token == null) {
-            throw new GseinException("token不能为空");
+            throw new GseinException(ErrorCode.TOKEN_IS_EMPTY);
         }
 
         if (JwtUtil.verify(token) && JwtUtil.isExpired(token)) {
-            throw new GseinException("token已过期");
+            throw new GseinException(ErrorCode.TOKEN_IS_EXPIRED);
         }
 
         if (!JwtUtil.verify(token)) {
-            throw new GseinException("token不合法");
+            throw new GseinException(ErrorCode.TOKEN_IS_ILLEGAL);
         }
 
         String username = JwtUtil.getUsername(token);

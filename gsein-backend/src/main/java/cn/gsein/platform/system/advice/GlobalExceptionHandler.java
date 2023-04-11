@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GseinException.class)
     public Result<Void> handleGseinException(GseinException e) {
         log.error(e.getMessage(), e);
-        return Result.error(e.getMessage());
+        return Result.error(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

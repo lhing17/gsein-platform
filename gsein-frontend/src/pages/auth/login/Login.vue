@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 // import { login } from '@/services/api/login'
@@ -50,15 +50,11 @@ const passwordErrors = ref<string[]>([]);
 const router = useRouter();
 const route = useRoute();
 
-const formReady = computed(() => !usernameErrors.value.length && !passwordErrors.value.length);
-
 // 载入登录页面时，将token置空
 const GlobalStore = useGlobalStore();
 GlobalStore.changeToken("");
 
 async function onsubmit() {
-  // if (!formReady.value) return;
-
   // login()
   usernameErrors.value = username.value ? [] : ["Username is required"];
   passwordErrors.value = password.value ? [] : ["Password is required"];

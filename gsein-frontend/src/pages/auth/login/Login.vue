@@ -52,6 +52,10 @@ const route = useRoute();
 
 const formReady = computed(() => !usernameErrors.value.length && !passwordErrors.value.length);
 
+// 载入登录页面时，将token置空
+const GlobalStore = useGlobalStore();
+GlobalStore.changeToken("");
+
 async function onsubmit() {
   // if (!formReady.value) return;
 

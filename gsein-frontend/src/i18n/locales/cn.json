@@ -8,7 +8,11 @@
     "login": "登录",
     "password": "密码",
     "signUp": "注册",
-    "termsOfUse": "使用条款"
+    "keep_logged_in": "保持登录状态",
+    "termsOfUse": "使用条款",
+    "recover_password": "找回密码",
+    "reset_password": "重置密码",
+    "sign_up": "注册"
   },
   "buttons": {
     "advanced": "图标、组、下拉菜单",

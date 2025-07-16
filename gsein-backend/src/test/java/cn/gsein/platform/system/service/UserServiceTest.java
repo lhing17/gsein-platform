@@ -30,9 +30,9 @@ class UserServiceTest {
     @Test
     void save() {
         User user = new User();
-        user.setUsername("孙八");
+        user.setUsername("admin");
         user.setGender(0);
-        user.setPassword("1234567");
+        user.setPassword("123456");
         user.setIdCard("110110200001010001");
         user.setEmail("0000@163.com");
         user.setPhone("13333333333");

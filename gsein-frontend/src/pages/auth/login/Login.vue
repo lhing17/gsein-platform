@@ -3,7 +3,7 @@
     <va-input
       v-model="username"
       class="mb-3"
-      type="email"
+      type="text"
       :label="t('auth.username')"
       :error="!!usernameErrors.length"
       :error-messages="usernameErrors"
@@ -27,7 +27,7 @@
     </div>
 
     <div class="d-flex justify-center mt-3">
-      <va-button class="my-0" @click="onsubmit">{{ t("auth.login") }}</va-button>
+      <va-button type="submit" class="my-0">{{ t("auth.login") }}</va-button>
     </div>
   </form>
 </template>

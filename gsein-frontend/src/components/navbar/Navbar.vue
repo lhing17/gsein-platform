@@ -9,7 +9,7 @@
           @click="isSidebarMinimized = !isSidebarMinimized"
         />
         <router-link to="/">
-          <span>吉森开发平台</span>
+          <img src="/logo.png" height="30" alt="Logo" />
         </router-link>
       </div>
     </template>

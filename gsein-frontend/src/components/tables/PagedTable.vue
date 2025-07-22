@@ -215,6 +215,10 @@ defineExpose({
   width: 80px;
 }
 
+:deep(.va-input-wrapper__size-keeper) {
+  width: auto;
+}
+
 .table--query:deep(.va-input-wrapper__label) {
   height: 14px;
 }

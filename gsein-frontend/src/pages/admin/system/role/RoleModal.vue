@@ -2,24 +2,41 @@
   <va-modal
     class="modal-crud-example"
     :model-value="shown"
-    title="Edit item"
+    :title="id === 0 ? t('buttons.add') + t('menu.role') : t('buttons.edit') + t('menu.role')"
     size="small"
     @ok="saveOrUpdate"
     @cancel="resetEditedItem"
   >
-    <va-input
-      v-for="key in Object.keys(realEditedItem)"
-      :key="key"
-      v-model="realEditedItem[key]"
-      class="my-3"
-      :label="key"
-    />
+    <div class="role-form pa-4">
+      <va-input
+        v-model="realEditedItem.name"
+        class="mb-4"
+        :label="t('tables.headings.name')"
+        :placeholder="t('tables.headings.name')"
+      />
+      <va-input
+        v-model="realEditedItem.roleKey"
+        class="mb-4"
+        :label="t('tables.headings.roleKey')"
+        :placeholder="t('tables.headings.roleKey')"
+      />
+      <va-input
+        v-model="realEditedItem.sort"
+        class="mb-4"
+        :label="t('tables.headings.sort')"
+        type="number"
+        :placeholder="t('tables.headings.sort')"
+      />
+    </div>
   </va-modal>
 </template>
 
 <script setup lang="ts">
 import { addRole, getRoleById, updateRole } from "@/services/api/role";
 import { ref, watchEffect } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = withDefaults(
   defineProps<{
@@ -65,5 +82,7 @@ function resetEditedItem() {
 </script>
 
 <style lang="scss" scoped>
-
+.role-form {
+  min-width: 300px;
+}
 </style>

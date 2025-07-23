@@ -1,23 +1,23 @@
 <template>
   <div class="markup-tables flex">
     <va-card class="flex mb-4">
-      <va-card-title>{{ title }}</va-card-title>
+      <va-card-title class="card-title">{{ title }}</va-card-title>
       <va-card-content>
         <div class="table--query row">
-          <slot name="query"  />
+          <slot name="query" />
           <va-spacer />
-          <div class="flex justify-center">
-            <va-button @click="loadData" class="mr-2">
+          <div class="flex justify-center query-buttons">
+            <va-button @click="loadData" class="mr-2" preset="primary" size="small">
               {{ t("buttons.query") }}
             </va-button>
-            <va-button @click="reset" preset="secondary" border-color="primary">
+            <va-button @click="reset" preset="secondary" border-color="primary" size="small">
               {{ t("buttons.reset") }}
             </va-button>
           </div>
         </div>
-        <va-divider />
-        <div>
-          <va-button @click="addRow">
+        <va-divider class="my-3" />
+        <div class="mb-3">
+          <va-button @click="addRow" preset="primary" size="small">
             {{ t("buttons.add") }}
           </va-button>
         </div>
@@ -26,6 +26,9 @@
           :columns="columns"
           v-model:sort-by="sortBy"
           v-model:sorting-order="sortingOrder"
+          class="mb-3"
+          striped
+          hoverable
         >
           <template #cell(actions)="{rowIndex}">
             <va-button-group>
@@ -33,7 +36,9 @@
                 @click="editRow(rowIndex)"
                 color="primary"
                 size="small"
-                class="mr-2"
+                icon="edit"
+                class="mr-1"
+                preset="primary"
               >
                 {{ t("buttons.edit") }}
               </va-button>
@@ -41,37 +46,40 @@
                 @click="deleteRow(rowIndex)"
                 color="danger"
                 size="small"
+                icon="delete"
+                preset="danger"
               >
                 {{ t("buttons.delete") }}
               </va-button>
             </va-button-group>
           </template>
         </va-data-table>
-        <div class="table--pagination justify-center">
-          <div class="justify-center">
+        <div class="table--pagination">
+          <div class="pagination-info">
             <va-select
               v-model="size"
-              :options="options">
+              :options="options"
+              size="small"
+              class="size-select"
+            >
               <template #prepend>
-                <span>显示第 {{ pageStart }} 到第 {{ pageEnd }} 条记录，总共 {{ total }} 条记录</span>
-                <span> &nbsp;&nbsp;&nbsp;&nbsp每页显示</span>
+                <span class="pagination-text">{{ t('tables.showing') }} {{ pageStart }} {{ t('tables.to') }} {{ pageEnd }} {{ t('tables.of') }} {{ total }} {{ t('tables.entries') }}</span>
+                <span class="ml-2">{{ t('tables.pageSize') }}</span>
               </template>
               <template #append>
-                <span>条记录</span>
+                <span>{{ t('tables.entries') }}</span>
               </template>
             </va-select>
           </div>
-          <va-spacer></va-spacer>
-          <div class="justify-center">
+          <div class="pagination-controls">
             <va-pagination
               v-model="page"
               :pages="pages"
-              :visible-pages="3"
+              :visible-pages="5"
               buttons-preset="primary"
               rounded
               gapped
               border-color="primary"
-              class="mb-6"
             />
           </div>
         </div>
@@ -163,11 +171,11 @@ function addRow() {
 
 async function deleteRow(rowIndex: number) {
   const ok = await confirm({
-    title: t("messages.confirm"),
+    title: t("messages.systemMessage"),
     message: t("messages.confirmDelete"),
-    okText: t("buttons.confirm"),
-    cancelText: t("buttons.cancel")
-  });
+    okText: t("modal.confirm"),
+    cancelText: t("modal.cancel"),
+  })
   if (!ok) {
     return;
   }
@@ -206,9 +214,37 @@ defineExpose({
   }
 }
 
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+}
+
 .table--pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.pagination-info {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-text {
+  font-size: 0.875rem;
+  color: var(--va-text-secondary);
+}
+
+.pagination-controls {
+  margin-top: 0.5rem;
+}
+
+.size-select {
+  width: 80px;
+  margin-left: 0.5rem;
 }
 
 :deep(.va-input-wrapper__field) {
@@ -219,19 +255,32 @@ defineExpose({
   width: auto;
 }
 
+.table--query {
+  margin-bottom: 1rem;
+}
+
 .table--query:deep(.va-input-wrapper__label) {
   height: 14px;
+  font-size: 0.875rem;
+}
+
+.query-buttons {
+  margin-top: 1.5rem;
 }
 
 .va-card {
   height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .va-card__content {
   height: calc(100% - 55px);
+  padding: 1.5rem;
 }
 
 .va-data-table {
   height: calc(100% - 133px);
+  border-radius: 4px;
+  overflow: hidden;
 }
 </style>

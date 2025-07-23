@@ -191,7 +191,10 @@
   },
   "messages": {
     "all": "查看全部消息",
-    "new": "来自{name}的新消息"
+    "new": "来自{name}的新消息",
+    "systemMessage": "系统提示",
+    "confirm": "确认",
+    "confirmDelete": "确定要删除该记录吗？"
   },
   "modal": {
     "cancel": "取消",
@@ -275,6 +278,11 @@
     "basic": "基本表格",
     "styled": "颜色，图标，标签",
     "advanced": "搜索和分页",
+    "showing": "显示第",
+    "to": "到第",
+    "of": "条，共",
+    "entries": "条记录",
+    "pageSize": "每页显示",
     "headings": {
       "city": "城市",
       "email": "电子邮箱",

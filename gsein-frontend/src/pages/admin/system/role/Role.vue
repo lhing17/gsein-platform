@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="role-page">
     <paged-table :data-producer="roleList"
                  :columns="columns"
                  :title="t('menu.role')"
@@ -9,14 +9,17 @@
                  @delete="deleteRow"
                  @reset="reset"
                  ref="roleTable">
-      >
       <template #query>
-        <va-input v-model="query.name"
-                  label="名称"
-                  class="flex flex-col md3" />
-        <va-input v-model="query.roleKey"
-                  label="角色Key"
-                  class="flex flex-col md3" />
+        <div class="query-form row wrap">
+          <va-input v-model="query.name"
+                    :label="t('tables.headings.name')"
+                    :placeholder="t('tables.headings.name')"
+                    class="query-item mb-2 mr-4" />
+          <va-input v-model="query.roleKey"
+                    :label="t('tables.headings.roleKey')"
+                    :placeholder="t('tables.headings.roleKey')"
+                    class="query-item mb-2" />
+        </div>
       </template>
     </paged-table>
     <role-modal
@@ -86,5 +89,16 @@ async function reset() {
 
 </script>
 <style lang="scss" scoped>
+.role-page {
+  height: 100%;
+}
 
+.query-form {
+  display: flex;
+  align-items: flex-end;
+}
+
+.query-item {
+  width: 200px;
+}
 </style>

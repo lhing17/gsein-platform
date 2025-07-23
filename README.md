@@ -58,7 +58,7 @@
 1. 创建数据库platform
 2. 修改application.yml中的数据库连接信息
 3. 使用IDEA打开项目，运行GseinPlatformApplication.java，或者使用maven命令：mvn spring-boot:run
-4. 访问http://localhost:8080/doc.html，查看接口文档是否能够正常访问
+4. 访问http://localhost:8888/doc.html，查看接口文档是否能够正常访问
 
 ### 前端项目
 1. 安装node.js
@@ -81,7 +81,7 @@
 2. 使用maven命令：mvn clean package -Dmaven.test.skip=true
 3. 将target目录下的gsein-platform-0.0.1-SNAPSHOT.jar改名后拷贝到服务器上
 4. 使用nohup命令启动jar包：nohup java -jar XXX.jar &
-5. 访问http://ip:8080/doc.html，查看接口文档是否能够正常访问
+5. 访问http://ip:8888/doc.html，查看接口文档是否能够正常访问
 6. 查看控制台日志，查看后端项目是否能够正常启动
 
 ### 前端项目

@@ -4,8 +4,9 @@
       <va-card-title class="card-title">{{ title }}</va-card-title>
       <va-card-content>
         <div class="table--query row">
-          <slot name="query" />
-          <va-spacer />
+          <div class="flex-grow-1">
+            <slot name="query" />
+          </div>
           <div class="flex justify-center query-buttons">
             <va-button @click="loadData" class="mr-2" preset="primary" size="small">
               {{ t("buttons.query") }}
@@ -60,14 +61,13 @@
               v-model="size"
               :options="options"
               size="small"
-              class="size-select"
             >
               <template #prepend>
                 <span class="pagination-text">{{ t('tables.showing') }} {{ pageStart }} {{ t('tables.to') }} {{ pageEnd }} {{ t('tables.of') }} {{ total }} {{ t('tables.entries') }}</span>
-                <span class="ml-2">{{ t('tables.pageSize') }}</span>
+                <span class="pagination-text">{{ t('tables.pageSize') }}</span>
               </template>
               <template #append>
-                <span>{{ t('tables.entries') }}</span>
+                <span class="pagination-text">{{ t('tables.entries') }}</span>
               </template>
             </va-select>
           </div>
@@ -80,6 +80,7 @@
               rounded
               gapped
               border-color="primary"
+              class="pagination-component"
             />
           </div>
         </div>
@@ -226,20 +227,31 @@ defineExpose({
   align-items: center;
   flex-wrap: wrap;
   margin-top: 1rem;
+  width: 100%;
+  overflow: visible;
 }
 
 .pagination-info {
   display: flex;
   align-items: center;
+  min-width: 300px;
 }
 
 .pagination-text {
   font-size: 0.875rem;
   color: var(--va-text-secondary);
+  white-space: nowrap;
 }
 
 .pagination-controls {
-  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 300px;
+}
+
+.pagination-component {
+  overflow: visible;
 }
 
 .size-select {
@@ -249,6 +261,7 @@ defineExpose({
 
 :deep(.va-input-wrapper__field) {
   width: 80px;
+  // display: inline-block;
 }
 
 :deep(.va-input-wrapper__size-keeper) {
@@ -256,7 +269,10 @@ defineExpose({
 }
 
 .table--query {
-  margin-bottom: 1rem;
+  margin: 0 auto!important;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
 }
 
 .table--query:deep(.va-input-wrapper__label) {
@@ -265,7 +281,10 @@ defineExpose({
 }
 
 .query-buttons {
-  margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 
 .va-card {
@@ -279,7 +298,7 @@ defineExpose({
 }
 
 .va-data-table {
-  height: calc(100% - 133px);
+  height: calc(100% - 175px);
   border-radius: 4px;
   overflow: hidden;
 }

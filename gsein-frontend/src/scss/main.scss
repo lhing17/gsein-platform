@@ -1,7 +1,19 @@
 @import 'vuestic-sass/index';
 @import 'icon-fonts/index';
 
-
+:root {
+    --va-input-font-size: 14px;
+  
+}
+.va-data-table {
+    --va-data-table-thead-font-size: 14px;
+    
+    .va-data-table__table {
+        .va-data-table__table-td {
+            font-size: 13px;
+        }
+    }
+}
 .va-modal__title {
     font-size: 1.5rem;
 }

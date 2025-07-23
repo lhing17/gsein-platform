@@ -10,7 +10,7 @@
                  @reset="reset"
                  ref="roleTable">
       <template #query>
-        <div class="query-form row wrap">
+        <div class="query-form">
           <va-input v-model="query.name"
                     :label="t('tables.headings.name')"
                     :placeholder="t('tables.headings.name')"
@@ -91,11 +91,17 @@ async function reset() {
 <style lang="scss" scoped>
 .role-page {
   height: 100%;
+  padding: 0 12px;
 }
 
 .query-form {
-  display: flex;
-  align-items: flex-end;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.query-item {
+  min-width: 200px;
 }
 
 .query-item {

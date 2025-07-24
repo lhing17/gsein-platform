@@ -15,7 +15,7 @@
       </div>
       <div class="app-layout__page">
         <div class="app-layout__tabs" v-if="tabs.length > 0">
-          <va-tabs v-model="activeTabPath" center>
+          <va-tabs v-model="activeTabPath" ref="tabsRef">
             <template #tabs>
               <va-tab 
                 v-for="tab in tabs" 
@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
 
@@ -71,7 +71,6 @@ import { useTabsStore } from "../stores/tabs-store";
 import Navbar from "../components/navbar/Navbar.vue";
 import Sidebar from "../components/sidebar/Sidebar.vue";
 import TabContextMenu from "../components/tabs/TabContextMenu.vue";
-import { useI18n } from "vue-i18n";
 
 const GlobalStore = useGlobalStore();
 const TabsStore = useTabsStore();
@@ -91,6 +90,8 @@ const { tabs, activeTab } = storeToRefs(TabsStore);
 const checkIsTablet = () => window.innerWidth <= tabletBreakPointPX;
 const checkIsMobile = () => window.innerWidth <= mobileBreakPointPX;
 
+const tabsRef = ref(null);
+
 // 计算属性：当前激活的标签页路径
 const activeTabPath = computed({
   get: () => activeTab.value,
@@ -102,6 +103,33 @@ const activeTabPath = computed({
       router.push(tab.fullPath);
     }
   }
+});
+
+// 激活标签的函数，确保在DOM更新后正确激活标签
+const activateTab = (path) => {
+  if (!path || !tabsRef.value || !tabsRef.value.$el) return;
+  
+  // 使用nextTick确保DOM已更新
+  nextTick(() => {
+    // 使用更通用的选择器方法找到对应的标签元素
+    const tabElements = tabsRef.value.$el.querySelectorAll('.va-tab');
+    const tabIndex = tabs.value.findIndex(tab => tab.path === path);
+    
+    if (tabIndex >= 0 && tabElements[tabIndex]) {
+      // 模拟点击事件以激活标签
+      tabElements[tabIndex].click();
+    }
+  });
+};
+
+// 监听activeTab变化，手动激活对应的标签
+watch(() => activeTab.value, (newPath) => {
+  activateTab(newPath);
+});
+
+// 监听tabs数组变化，确保在关闭标签后正确激活当前标签
+watch(() => tabs.value.length, () => {
+  activateTab(activeTab.value);
 });
 
 // 右键菜单相关状态
@@ -149,6 +177,9 @@ onMounted(() => {
   // 初始化时添加当前路由到标签页
   if (route.name) {
     TabsStore.addTab(route);
+  } else {
+    // 如果没有路由，默认导航到主页
+    router.push('/admin/home');
   }
 });
 
@@ -246,6 +277,9 @@ $tabletBreakPointPX: 768px;
 
     .va-tabs__wrapper {
       min-height: 40px;
+      .va-tabs__container {
+        margin-top: 4px;
+      }
     }
   }
 }

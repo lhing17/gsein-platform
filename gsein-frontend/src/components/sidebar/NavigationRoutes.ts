@@ -12,6 +12,13 @@ export default {
   },
   routes: [
     {
+      name: 'home',
+      displayName: 'menu.home',
+      meta: {
+        icon: 'home'
+      }
+    },
+    {
       name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {

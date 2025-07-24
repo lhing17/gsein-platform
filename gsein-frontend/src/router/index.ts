@@ -11,13 +11,22 @@ import { useGlobalStore } from "@/stores/global-store";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
-    redirect: { name: "dashboard" }
+    redirect: { name: "home" }
   },
   {
     name: "admin",
     path: "/admin",
     component: AppLayout,
     children: [
+      {
+        name: "home",
+        path: "home",
+        component: () => import("../pages/admin/home/Home.vue"),
+        meta: {
+          title: "主页",
+          icon: "home"
+        }
+      },
       {
         name: "dashboard",
         path: "dashboard",

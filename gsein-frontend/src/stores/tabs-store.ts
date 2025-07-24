@@ -13,8 +13,15 @@ export interface TabItem {
 export const useTabsStore = defineStore("tabs", {
   state: () => {
     return {
-      tabs: [] as TabItem[],
-      activeTab: ""
+      tabs: [{
+        name: "home",
+        title: "主页",
+        path: "/admin/home",
+        fullPath: "/admin/home",
+        icon: "home",
+        closable: false
+      }] as TabItem[],
+      activeTab: "/admin/home"
     };
   },
 
@@ -37,7 +44,7 @@ export const useTabsStore = defineStore("tabs", {
         path: route.path,
         fullPath: route.fullPath,
         icon: route.meta.icon as string,
-        closable: true
+        closable: (route.name as string) !== 'home'
       };
 
       this.tabs.push(newTab);

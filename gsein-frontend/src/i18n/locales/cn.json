@@ -156,6 +156,7 @@
     "persian": "波斯语"
   },
   "menu": {
+    "home": "主页",
     "auth": "授权",
     "buttons": "按钮",
     "charts": "图表",

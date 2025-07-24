@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { RouteLocationNormalized } from "vue-router";
+import i18n from "@/i18n";
+import NavigationRoutes from "@/components/sidebar/NavigationRoutes";
 
 export interface TabItem {
   name: string;
@@ -9,6 +11,53 @@ export interface TabItem {
   icon?: string;
   closable: boolean;
   isActive: boolean;
+}
+
+// 递归查找路由的displayName
+function findDisplayName(routeName: string, routes: any[]): string | null {
+  for (const route of routes) {
+    if (route.name === routeName) {
+      return route.displayName;
+    }
+    if (route.children) {
+      const found = findDisplayName(routeName, route.children);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+// 获取翻译标题的辅助函数
+function getTranslatedTitle(routeName: string, metaTitle?: string): string {
+  // 优先使用 meta.title
+  if (metaTitle) {
+    return metaTitle;
+  }
+  
+  try {
+    // 从NavigationRoutes中查找对应的displayName
+    const displayName = findDisplayName(routeName, NavigationRoutes.routes);
+    
+    if (displayName) {
+      // 使用找到的displayName进行i18n翻译
+      const translatedTitle = i18n.global.t(displayName);
+      // 如果翻译结果和key相同，说明没有找到翻译，使用原始名称
+      if (translatedTitle === displayName) {
+        return routeName;
+      }
+      return translatedTitle;
+    } else {
+      // 如果在NavigationRoutes中没有找到，尝试使用menu命名空间
+      const translatedTitle = i18n.global.t(`menu.${routeName}`);
+      if (translatedTitle === `menu.${routeName}`) {
+        return routeName;
+      }
+      return translatedTitle;
+    }
+  } catch (error) {
+    // 如果翻译失败，使用路由名称
+    return routeName;
+  }
 }
 
 export const useTabsStore = defineStore("tabs", {
@@ -44,7 +93,10 @@ export const useTabsStore = defineStore("tabs", {
       }
 
       // 获取路由的标题
-      const title = route.meta.title as string || route.name as string;
+      const title = getTranslatedTitle(
+        route.name as string, 
+        route.meta.title as string
+      );
 
       // 添加新标签页
       const newTab: TabItem = {

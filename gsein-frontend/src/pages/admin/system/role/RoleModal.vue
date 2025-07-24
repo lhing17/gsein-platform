@@ -4,6 +4,7 @@
     :model-value="shown"
     :title="id === 0 ? t('buttons.add') + t('menu.role') : t('buttons.edit') + t('menu.role')"
     size="small"
+    close-button
     @ok="saveOrUpdate"
     @cancel="resetEditedItem"
   >

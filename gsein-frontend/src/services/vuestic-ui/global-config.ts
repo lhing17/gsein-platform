@@ -25,7 +25,7 @@ export default {
   components: {
     VaIcon,
     VaButton: {
-      round: true,
+      round: false,
     },
     presets: {
       VaButton: {

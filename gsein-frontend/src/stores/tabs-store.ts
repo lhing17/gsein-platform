@@ -8,6 +8,7 @@ export interface TabItem {
   fullPath: string;
   icon?: string;
   closable: boolean;
+  isActive: boolean;
 }
 
 export const useTabsStore = defineStore("tabs", {
@@ -26,6 +27,14 @@ export const useTabsStore = defineStore("tabs", {
   },
 
   actions: {
+    activateTab(tabs: TabItem[], path: string) {
+      tabs.forEach(t => t.isActive = false);
+      const tab = tabs.find(tab => tab.path === path);
+      if (tab) {
+        this.activeTab = path;
+        tab.isActive = true
+      }
+    },
     addTab(route: RouteLocationNormalized) {
       // 如果标签页已存在，则激活它
       const isExist = this.tabs.some(tab => tab.path === route.path);
@@ -44,11 +53,12 @@ export const useTabsStore = defineStore("tabs", {
         path: route.path,
         fullPath: route.fullPath,
         icon: route.meta.icon as string,
-        closable: (route.name as string) !== 'home'
+        closable: (route.name as string) !== 'home',
+        isActive: true
       };
 
       this.tabs.push(newTab);
-      this.activeTab = route.path;
+      this.activateTab(this.tabs, route.path)
     },
 
     removeTab(path: string) {
@@ -59,7 +69,7 @@ export const useTabsStore = defineStore("tabs", {
       if (this.activeTab === path) {
         const nextTab = this.tabs[index - 1] || this.tabs[index + 1];
         if (nextTab) {
-          this.activeTab = nextTab.path;
+          this.activateTab(this.tabs, nextTab.path)
         }
       }
 
@@ -68,13 +78,13 @@ export const useTabsStore = defineStore("tabs", {
 
     removeOtherTabs(path: string) {
       this.tabs = this.tabs.filter(tab => tab.path === path || !tab.closable);
-      this.activeTab = path;
+      this.activateTab(this.tabs, path) 
     },
 
     removeAllTabs() {
       this.tabs = this.tabs.filter(tab => !tab.closable);
       if (this.tabs.length > 0) {
-        this.activeTab = this.tabs[0].path;
+        this.activateTab(this.tabs, this.tabs[0].path) 
       } else {
         this.activeTab = "";
       }

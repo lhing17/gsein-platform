@@ -105,32 +105,18 @@ const activeTabPath = computed({
   }
 });
 
-// // 激活标签的函数，确保在DOM更新后正确激活标签
-// const activateTab = (path) => {
-//   if (!path || !tabsRef.value || !tabsRef.value.$el) return;
-  
-//   // 使用nextTick确保DOM已更新
-//   nextTick(() => {
-//     // 使用更通用的选择器方法找到对应的标签元素
-//     const tabElements = tabsRef.value.$el.querySelectorAll('.va-tab');
-//     const tabIndex = tabs.value.findIndex(tab => tab.path === path);
-    
-//     if (tabIndex >= 0 && tabElements[tabIndex]) {
-//       // 模拟点击事件以激活标签
-//       tabElements[tabIndex].click();
-//     }
-//   });
-// };
-
-// // 监听activeTab变化，手动激活对应的标签
-// watch(() => activeTab.value, (newPath) => {
-//   activateTab(newPath);
-// });
-
-// // 监听tabs数组变化，确保在关闭标签后正确激活当前标签
-// watch(() => tabs.value.length, () => {
-//   activateTab(activeTab.value);
-// });
+// 监听activeTab变化，确保移除标签页时能正确跳转
+watch(activeTab, (newPath, oldPath) => {
+  if (newPath !== oldPath && newPath) {
+    // 检查当前路由是否与新的激活标签页路径一致
+    if (route.path !== newPath) {
+      const tab = tabs.value.find(tab => tab.path === newPath);
+      if (tab) {
+        router.push(tab.fullPath);
+      }
+    }
+  }
+}, { immediate: false });
 
 // 右键菜单相关状态
 const contextMenuVisible = ref(false);

@@ -90,7 +90,7 @@ async function reset() {
 </script>
 <style lang="scss" scoped>
 .role-page {
-  height: 100%;
+  height: calc(100% - 41px);
   padding: 0 12px;
 }
 

@@ -347,5 +347,10 @@
   "vuestic": {
     "ok": "确认",
     "cancel": "取消"
+  },
+  "tabs": {
+    "close": "关闭",
+    "closeOthers": "关闭其他",
+    "closeAll": "关闭所有"
   }
 }

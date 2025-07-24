@@ -204,7 +204,7 @@ defineExpose({
 
 <style lang="scss" scoped>
 .markup-tables {
-  height: calc(100vh - 112px);
+  height: calc(100vh - 153px);
 
   .table-wrapper {
     overflow: auto;
@@ -293,7 +293,7 @@ defineExpose({
 }
 
 .va-card__content {
-  height: calc(100% - 55px);
+  height: calc(100% - 96px);
   padding: 1.5rem;
 }
 

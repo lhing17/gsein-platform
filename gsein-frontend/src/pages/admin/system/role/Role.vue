@@ -91,7 +91,7 @@ async function reset() {
 <style lang="scss" scoped>
 .role-page {
   height: calc(100% - 41px);
-  padding: 0 12px;
+  padding: 12px 0;
 }
 
 .query-form {

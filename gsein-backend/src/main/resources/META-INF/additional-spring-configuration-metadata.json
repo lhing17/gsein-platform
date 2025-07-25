@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "security.ignore.urls",
+    "type": "java.util.List",
+    "description": "A description for 'security.ignore.urls'"
+  },
+  {
+    "name": "xxl.job.admin.addresses",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.admin.addresses'"
+  },
+  {
+    "name": "xxl.job.accessToken",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.accessToken'"
+  },
+  {
+    "name": "xxl.job.executor.appname",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.appname'"
+  },
+  {
+    "name": "xxl.job.executor.address",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.address'"
+  },
+  {
+    "name": "xxl.job.executor.ip",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.ip'"
+  },
+  {
+    "name": "xxl.job.executor.port",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.port'"
+  },
+  {
+    "name": "xxl.job.executor.logpath",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.logpath'"
+  },
+  {
+    "name": "xxl.job.executor.logretentiondays",
+    "type": "java.lang.String",
+    "description": "A description for 'xxl.job.executor.logretentiondays'"
+  }
+]}

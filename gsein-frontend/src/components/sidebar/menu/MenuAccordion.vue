@@ -17,7 +17,8 @@
       <template v-for="(child, index) in route.children" :key="index">
         <va-sidebar-item :active="isRouteActive(child)" :to="{ name: child.name }">
           <va-sidebar-item-content>
-            <div class="va-sidebar-item__icon" />
+            <va-icon :name="child.meta.icon" class="va-sidebar-item__icon" v-if="child.meta" />
+            <div class="va-sidebar-item__icon" v-else/>
 
             <va-sidebar-item-title>
               {{ t(child.displayName) }}

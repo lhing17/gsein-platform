@@ -15,8 +15,8 @@ export default {
       name: 'home',
       displayName: 'menu.home',
       meta: {
-        icon: 'home'
-      }
+        icon: 'home',
+      },
     },
     {
       name: 'dashboard',
@@ -29,14 +29,17 @@ export default {
       name: 'system',
       displayName: 'menu.system',
       meta: {
-        icon: 'vuestic-iconset-system',
+        icon: 'settings',
       },
       children: [
         {
           name: 'role',
           displayName: 'menu.role',
-        }
-      ]
+          meta: {
+            icon: 'people',
+          },
+        },
+      ],
     },
     {
       name: 'statistics',

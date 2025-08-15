@@ -27,7 +27,7 @@ public class XxlJobInfoDaoTest {
 		logger.info("", list);
 		logger.info("", list_count);
 
-		List<XxlJobInfo> list2 = xxlJobInfoDao.getJobsByGroup(1);
+		xxlJobInfoDao.getJobsByGroup(1);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class XxlJobInfoDaoTest {
 		info.setUpdateTime(new Date());
 		info.setGlueUpdatetime(new Date());
 
-		int count = xxlJobInfoDao.save(info);
+		xxlJobInfoDao.save(info);
 
 		XxlJobInfo info2 = xxlJobInfoDao.loadById(info.getId());
 		info.setScheduleType(ScheduleTypeEnum.FIX_RATE.name());
@@ -73,13 +73,13 @@ public class XxlJobInfoDaoTest {
 		info2.setChildJobId("1");
 
 		info2.setUpdateTime(new Date());
-		int item2 = xxlJobInfoDao.update(info2);
+		xxlJobInfoDao.update(info2);
 
 		xxlJobInfoDao.delete(info2.getId());
 
-		List<XxlJobInfo> list2 = xxlJobInfoDao.getJobsByGroup(1);
+		xxlJobInfoDao.getJobsByGroup(1);
 
-		int ret3 = xxlJobInfoDao.findAllCount();
+		xxlJobInfoDao.findAllCount();
 
 	}
 

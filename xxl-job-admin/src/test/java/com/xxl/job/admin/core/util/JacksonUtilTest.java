@@ -30,7 +30,8 @@ public class JacksonUtilTest {
         String jsonString = "{\"aaa\":\"111\",\"bbb\":\"222\"}";
 
         //when
-        Map result = JacksonUtil.readValue(jsonString, Map.class);
+        @SuppressWarnings("unchecked")
+        Map<String, String> result = JacksonUtil.readValue(jsonString, Map.class);
 
         //then
         assertEquals(result.get("aaa"), "111");

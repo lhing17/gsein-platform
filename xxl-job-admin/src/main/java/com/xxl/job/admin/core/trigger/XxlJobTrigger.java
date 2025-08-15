@@ -93,7 +93,7 @@ public class XxlJobTrigger {
 
     private static boolean isNumeric(String str){
         try {
-            int result = Integer.valueOf(str);
+            Integer.valueOf(str);
             return true;
         } catch (NumberFormatException e) {
             return false;

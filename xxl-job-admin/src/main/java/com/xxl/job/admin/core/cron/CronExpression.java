@@ -154,7 +154,7 @@ import java.util.TreeSet;
  * month&quot;.
  * <P>
  * The '#' character is allowed for the day-of-week field. This character is
- * used to specify &quot;the nth&quot; XXX day of the month. For example, the 
+ * used to specify "the nth" day of the month. For example, the
  * value of &quot;6#3&quot; in the day-of-week field means the third Friday of 
  * the month (day 6 = Friday and &quot;#3&quot; = the 3rd one in the month). 
  * Other examples: &quot;2#1&quot; = the first Monday of the month and 
@@ -1373,7 +1373,7 @@ public final class CronExpression implements Serializable, Cloneable {
                     continue;
                 }
             } else if (dayOfWSpec && !dayOfMSpec) { // get day by day of week rule
-                if (lastdayOfWeek) { // are we looking for the last XXX day of
+                if (lastdayOfWeek) { // are we looking for the last n day of
                     // the month?
                     int dow = daysOfWeek.first(); // desired
                     // d-o-w
@@ -1417,7 +1417,7 @@ public final class CronExpression implements Serializable, Cloneable {
                     }
 
                 } else if (nthdayOfWeek != 0) {
-                    // are we looking for the Nth XXX day in the month?
+                    // are we looking for the Nth day in the month?
                     int dow = daysOfWeek.first(); // desired
                     // d-o-w
                     int cDow = cl.get(Calendar.DAY_OF_WEEK); // current d-o-w

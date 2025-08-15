@@ -8,8 +8,6 @@ import com.xxl.job.admin.core.trigger.TriggerTypeEnum;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 
@@ -17,8 +15,6 @@ import java.text.MessageFormat;
  * @author xuxueli 2020-10-30 20:43:10
  */
 public class XxlJobCompleter {
-    private static Logger logger = LoggerFactory.getLogger(XxlJobCompleter.class);
-
     /**
      * common fresh handle entrance (limit only once)
      *
@@ -89,7 +85,7 @@ public class XxlJobCompleter {
 
     private static boolean isNumeric(String str){
         try {
-            int result = Integer.valueOf(str);
+            Integer.valueOf(str);
             return true;
         } catch (NumberFormatException e) {
             return false;

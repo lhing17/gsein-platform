@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class XxlJobLogGlueDaoTest {
@@ -24,13 +23,13 @@ public class XxlJobLogGlueDaoTest {
 
         logGlue.setAddTime(new Date());
         logGlue.setUpdateTime(new Date());
-        int ret = xxlJobLogGlueDao.save(logGlue);
+        xxlJobLogGlueDao.save(logGlue);
 
-        List<XxlJobLogGlue> list = xxlJobLogGlueDao.findByJobId(1);
+        xxlJobLogGlueDao.findByJobId(1);
 
-        int ret2 = xxlJobLogGlueDao.removeOld(1, 1);
+        xxlJobLogGlueDao.removeOld(1, 1);
 
-        int ret3 =xxlJobLogGlueDao.deleteByJobId(1);
+        xxlJobLogGlueDao.deleteByJobId(1);
     }
 
 }

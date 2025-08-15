@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class XxlJobGroupDaoTest {
@@ -16,9 +15,9 @@ public class XxlJobGroupDaoTest {
 
     @Test
     public void test(){
-        List<XxlJobGroup> list = xxlJobGroupDao.findAll();
+        xxlJobGroupDao.findAll();
 
-        List<XxlJobGroup> list2 = xxlJobGroupDao.findByAddressType(0);
+        xxlJobGroupDao.findByAddressType(0);
 
         XxlJobGroup group = new XxlJobGroup();
         group.setAppname("setAppName");
@@ -27,7 +26,7 @@ public class XxlJobGroupDaoTest {
         group.setAddressList("setAddressList");
         group.setUpdateTime(new Date());
 
-        int ret = xxlJobGroupDao.save(group);
+         xxlJobGroupDao.save(group);
 
         XxlJobGroup group2 = xxlJobGroupDao.load(group.getId());
         group2.setAppname("setAppName2");
@@ -36,9 +35,9 @@ public class XxlJobGroupDaoTest {
         group2.setAddressList("setAddressList2");
         group2.setUpdateTime(new Date());
 
-        int ret2 = xxlJobGroupDao.update(group2);
+        xxlJobGroupDao.update(group2);
 
-        int ret3 = xxlJobGroupDao.remove(group.getId());
+        xxlJobGroupDao.remove(group.getId());
     }
 
 }

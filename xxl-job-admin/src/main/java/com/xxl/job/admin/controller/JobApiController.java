@@ -55,6 +55,7 @@ public class JobApiController {
 
         // services mapping
         if ("callback".equals(uri)) {
+            @SuppressWarnings("unchecked")
             List<HandleCallbackParam> callbackParamList = GsonTool.fromJson(data, List.class, HandleCallbackParam.class);
             return adminBiz.callback(callbackParamList);
         } else if ("registry".equals(uri)) {
